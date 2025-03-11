@@ -51,7 +51,9 @@ const Home = () => {
           <TitleH2>Find Your</TitleH2>
           <Th2>Favorite Pokémon</Th2>
           <DivSearch>
-            <SearchButton>O</SearchButton>
+            <SearchButton>
+              <img src="src/assets/search-svgrepo-com.svg" width={16} alt="search icon" />
+            </SearchButton>
             <InputSearch type="text" placeholder="Pesquisar..." />
           </DivSearch>
         </DivHeader>
@@ -67,10 +69,10 @@ const Home = () => {
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
                   alt={poke.name}
-                  width={90}
-                  height={90}
+                  width={130}
+                  height={130}
                 />
-                <p>{poke.name}</p>
+                <Pagraph>{poke.name}</Pagraph>
               </LI>
             );
           })}
@@ -96,6 +98,10 @@ const TitleH1 = styled.h1`
   color: #f9f9f9;
   text-align: start;
   padding: 0 0 90px 0;
+
+  &::before{
+  content: url:('../assets/image_no_bg(1).png');
+  }
 `;
 const TitleH2 = styled.h2`
     font-size: 30px;
@@ -115,11 +121,11 @@ const Th2 = styled.h2`
 `;
 
 const DivHeader = styled.div`
-  max-width: 350px;
+  max-width: 100%;
 `;
 
 const DivSearch = styled.div`
-  max-width: 350px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   margin-top: 5px;
@@ -141,6 +147,15 @@ const SearchButton = styled.button`
   padding: 10px;
   border-radius: 20px 0 0 20px;
   width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #fff;
+
+  &:focus-visible{
+    border: none;
+  }
 `;
 
 
@@ -162,13 +177,13 @@ const UL = styled.ul`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: #f1f1f1;
     padding: 20px 16px;
     border-radius: 60px 60px 0 0;
 `;
 
 const LI = styled.li`
-  background-color: #f1f1f1;
+  background-color: #fff;
   list-style: none;
   margin: 15px;
   width: 142px;
@@ -180,6 +195,15 @@ const LI = styled.li`
     cursor: pointer;
     background-color: rgb(210, 210, 210);
   }
+`;
+
+const Pagraph = styled.p`
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  position: relative;
+  top: -22px;
 `;
 
 export default Home;
