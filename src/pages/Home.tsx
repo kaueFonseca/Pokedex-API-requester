@@ -99,8 +99,14 @@ const TitleH1 = styled.h1`
   text-align: start;
   padding: 0 0 90px 0;
 
-  &::before{
-  content: url:('../assets/image_no_bg(1).png');
+   &::before {
+    content: "";
+    background: url("../assets/pokeball.png") no-repeat center;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
+    transform: translateY(-50%);
+    background-color: black;
   }
 `;
 const TitleH2 = styled.h2`
