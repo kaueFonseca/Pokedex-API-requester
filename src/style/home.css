@@ -10,4 +10,8 @@
   position: absolute;
   top: 40px;
   left: 0;
+
+  @media (min-width: 1205px) {
+      left: 10px;
+  }
 }

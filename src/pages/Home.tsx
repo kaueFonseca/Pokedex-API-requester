@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header>
+      <Header className="header-container">
         <TitleH1 className="poketitle">Pokédex</TitleH1>
         <DivHeader>
           <TitleH2>Find Your</TitleH2>
@@ -80,6 +80,10 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
+
+  @media (min-width: 1205px) {
+    padding: 24px;
+  }
 `;
 
 const TitleH1 = styled.h1`
@@ -147,7 +151,6 @@ const SearchButton = styled.button`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-  max-width: 1206px;
   margin: 0 auto;
   background-color: #ff5656;
 `;
