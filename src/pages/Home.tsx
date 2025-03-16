@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import ButtonLoadMore from "../components/ButtonLoadMore";
-import PokeCard from "../components/PokeCard"; // Import the new component
+import PokeCard from "../components/PokeCard";
 import styled from "styled-components";
 import "../style/home.css";
+import ButtonSearchType from "../components/ButtonSearchType";
 
 interface Pokemon {
   name: string;
@@ -16,6 +17,7 @@ const Home = () => {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [selectedType, setSelectedType] = useState<string>("");
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -26,7 +28,13 @@ const Home = () => {
         );
         const data = await response.json();
 
-        setPokemons((prev) => [...prev, ...data.results]);
+        setPokemons((prev) => {
+          const newPokemons = data.results.filter(
+            (newPoke: Pokemon) => !prev.some((poke) => poke.name === newPoke.name)
+          );
+          return [...prev, ...newPokemons];
+        });
+
         setHasMore(data.results.length === itemsPerPage);
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
@@ -36,6 +44,26 @@ const Home = () => {
 
     fetchPokemons();
   }, [offset]);
+
+  useEffect(() => {
+    if (!selectedType) return;
+
+    const fetchPokemonsByType = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/type/${selectedType}`);
+        const data = await response.json();
+        const filteredPokemons = data.pokemon.map((p: any) => p.pokemon);
+
+        setPokemons(filteredPokemons);
+      } catch (error) {
+        console.error("Error fetching Pokémon by type:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchPokemonsByType();
+  }, [selectedType]);
 
   const handleLoadMore = () => {
     setOffset((prev) => prev + itemsPerPage);
@@ -48,7 +76,7 @@ const Home = () => {
         <DivHeader>
           <TitleH2>Find Your</TitleH2>
           <Th2>Favorite Pokémon</Th2>
-          <DivSearch>
+          <DivSearchBar>
             <SearchButton>
               <img
                 src="src/assets/search-svgrepo-com.svg"
@@ -57,7 +85,10 @@ const Home = () => {
               />
             </SearchButton>
             <InputSearch type="text" placeholder="Pesquisar..." />
-          </DivSearch>
+          </DivSearchBar>
+          <div>
+            <ButtonSearchType onSelectType={setSelectedType} />
+          </div>
         </DivHeader>
       </Header>
 
@@ -67,7 +98,7 @@ const Home = () => {
             <PokeCard key={index} name={poke.name} url={poke.url} />
           ))}
         </UL>
-        <ButtonLoadMore onClick={handleLoadMore} isLoading={loading} hasMore={hasMore} />
+        {hasMore && <ButtonLoadMore onClick={handleLoadMore} isLoading={loading} hasMore={hasMore} />}
       </Section>
     </div>
   );
@@ -76,7 +107,6 @@ const Home = () => {
 const Header = styled.header`
   background-color: #ff5656;
   text-align: center;
-  height: 300px;
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
@@ -115,7 +145,7 @@ const DivHeader = styled.div`
   max-width: 100%;
 `;
 
-const DivSearch = styled.div`
+const DivSearchBar = styled.div`
   max-width: 100%;
   margin: 0 auto;
   display: flex;
@@ -126,7 +156,7 @@ const InputSearch = styled.input`
   display: flex;
   width: 100%;
   margin: 0 auto;
-  height: 40px;
+  height: 50px;
   padding: 5px;
   border: none;
   border-radius: 0 20px 20px 0;
