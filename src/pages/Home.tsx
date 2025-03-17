@@ -4,6 +4,7 @@ import PokeCard from "../components/PokeCard";
 import styled from "styled-components";
 import "../style/home.css";
 import ButtonSearchType from "../components/ButtonSearchType";
+import { Link } from "react-router-dom";
 
 interface Pokemon {
   name: string;
@@ -94,9 +95,14 @@ const Home = () => {
 
       <Section>
         <UL>
-          {pokemons.map((poke, index) => (
-            <PokeCard key={index} name={poke.name} url={poke.url} />
-          ))}
+          {pokemons.map((poke) => {
+            const pokemonId = poke.url.split("/").slice(-2, -1)[0];
+            return (
+              <Link key={pokemonId} to={`/pokemon/${pokemonId}`}>
+                <PokeCard name={poke.name} url={poke.url} />
+              </Link>
+            );
+          })}
         </UL>
         {hasMore && <ButtonLoadMore onClick={handleLoadMore} isLoading={loading} hasMore={hasMore} />}
       </Section>
