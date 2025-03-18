@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getPokemonTypes } from "../services/pokemonService";
+import { getPokemonTypes } from "../../services/pokemonService";
 
 interface Type {
   name: string;

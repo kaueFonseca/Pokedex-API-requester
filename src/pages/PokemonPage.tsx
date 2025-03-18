@@ -1,12 +1,10 @@
-import { useParams, Link } from "react-router-dom";
+import PokemonDetailedPage from "../components/PokemonDetails/PokemonDetailedPage";
 
 const PokemonPage = () => {
-    const { id } = useParams<Record<string, string>>(); 
 
     return (
         <div>
-            <h1>Pokemon Page {id}</h1>
-            <Link to="/">Voltar</Link>
+            <PokemonDetailedPage />
         </div>
     );
 };
