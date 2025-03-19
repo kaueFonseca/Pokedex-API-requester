@@ -35,15 +35,11 @@ export const getPokemonsByType = async (type: string) => {
 
 export const getPokemonID = async (id: number) => {
   try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon${id}`
-    );
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const data = await response.json();
-    return data.results;
+    return data;
   } catch (error) {
-    console.error("Error in fetching Pokémon API:", error);
-    return [];
+    console.error("Error in fetching PokémonID API:", error);
+    return null;
   }
 };
-
-getPokemonID(1).then((data) => console.log(data));

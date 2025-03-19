@@ -98,9 +98,9 @@ const HomePage = () => {
                     {pokemons.map((poke) => {
                         const pokemonId = poke.url.split("/").slice(-2, -1)[0];
                         return (
-                            <Link key={pokemonId} to={`/pokemon/${pokemonId}`}>
+                            <StyledLink key={pokemonId} to={`/pokemon/${pokemonId}`}>
                                 <PokeCard name={poke.name} url={poke.url} />
-                            </Link>
+                            </StyledLink>
                         );
                     })}
                 </UL>
@@ -109,6 +109,10 @@ const HomePage = () => {
         </div>
     );
 };
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
 
 const Header = styled.header`
   background-color: #ff5656;
