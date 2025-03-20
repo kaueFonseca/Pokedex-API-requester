@@ -20,7 +20,7 @@ const ButtonSearchType = ({ onSelectType }: { onSelectType: (type: string) => vo
   }, []);
 
   return (
-    <SelectFilter onChange={(e) => onSelectType(e.target.value)}>
+    <SelectFilter onChange={(e: any) => onSelectType(e.target.value)}>
       <option value="">All Types</option>
       {types.map((type) => (
         <option key={type.name} value={type.name}>

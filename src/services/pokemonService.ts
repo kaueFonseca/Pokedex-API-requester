@@ -43,3 +43,20 @@ export const getPokemonID = async (id: number) => {
     return null;
   }
 };
+
+export const getPokemonDescription = async (id: number) => {
+  try {
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const description = data.flavor_text_entries.find(
+      (entry: any) => entry.language.name === "en"
+    )?.flavor_text;
+
+    return description || "No description available";
+  } catch (error) {
+    console.error("Error in fetching Pokémon Description:", error);
+    return null;
+  }
+};
