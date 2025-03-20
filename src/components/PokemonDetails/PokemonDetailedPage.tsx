@@ -5,6 +5,7 @@ import { getPokemonID } from "../../services/pokemonService";
 import GoBackToHomeButton from "./GoBackToHomeButton/GoBackToHomeButton";
 import { getPokemonDescription } from "../../services/pokemonService";
 import styled from "styled-components";
+import PokeballBackground from "../../assets/pokeball_graphic_by_maratuna_d2joc5j.png";
 
 const PokemonDetailedPage = () => {
   const [pokemon, setPokemon] = useState<any>(null);
@@ -38,7 +39,7 @@ const PokemonDetailedPage = () => {
         {pokemon ? (
           <div>
             {pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default && (
-              <img width={100} src={pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default} alt={pokemon.name} />
+              <img width={170} src={pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default} alt={pokemon.name} />
             )}
           </div>
         ) : (
@@ -54,9 +55,9 @@ const PokemonDetailedPage = () => {
 
       <main>
 
-        <p>{description}</p>
-        <p>Altura: {pokemon?.height}</p>
-        <p>Peso: {pokemon?.weight}</p>
+        <P>{description}</P>
+        <p>Altura: <span></span>{pokemon?.height} m</p>
+        <p>Peso: {pokemon?.weight} kg</p>
         <p>Experiência base: {pokemon?.base_experience}</p>
 
 
@@ -88,10 +89,15 @@ const PokemonDetailedPage = () => {
 };
 
 const Header = styled.header`
-  background: linear-gradient(to bottom, #ffeb3b, #ffffff); 
+  background: red; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url(${PokeballBackground});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  padding: 20px 0;
 `;
 
 const Nav = styled.nav`
@@ -124,13 +130,22 @@ const H1span = styled.span`
 `
 
 const LItypes = styled.li`
-background: #fff;
-color: #000;
+background: #000;
+color: #fff;
 border-radius: 22px;
 padding: 3px 10px;
 margin: 5px;
 text-transform: capitalize;
 text-align: center;
 list-style: none;
-`
+`;
+
+const P = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  padding: 10px 16px;
+`;
+
+
 export default PokemonDetailedPage;
