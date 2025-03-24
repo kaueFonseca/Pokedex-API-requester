@@ -19,6 +19,11 @@ const HomePage = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [selectedType, setSelectedType] = useState<string>("");
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredPokemons = pokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     useEffect(() => {
         const fetchPokemons = async () => {
@@ -69,6 +74,9 @@ const HomePage = () => {
     const handleLoadMore = () => {
         setOffset((prev) => prev + itemsPerPage);
     };
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value)
+    }
 
     return (
         <div>
@@ -85,7 +93,12 @@ const HomePage = () => {
                                 alt="search icon"
                             />
                         </SearchButton>
-                        <InputSearch type="text" placeholder="Pesquisar..." />
+                        <InputSearch
+                            type="text"
+                            placeholder="Pesquisar..."
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
                     </DivSearchBar>
                     <div>
                         <ButtonSearchType onSelectType={setSelectedType} />
@@ -95,7 +108,7 @@ const HomePage = () => {
 
             <Section>
                 <UL>
-                    {pokemons.map((poke) => {
+                    {filteredPokemons.map((poke) => {
                         const pokemonId = poke.url.split("/").slice(-2, -1)[0];
                         return (
                             <StyledLink key={pokemonId} to={`/pokemon/${pokemonId}`}>
