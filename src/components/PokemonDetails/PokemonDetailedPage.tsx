@@ -109,8 +109,12 @@ const PokemonDetailedPage = () => {
           <StatsList>
             {pokemon?.stats.map((stat: any) => (
               <StatItem key={stat.stat.name}>
-                {stat.stat.name}: {stat.base_stat}
+                <StatName>{stat.stat.name}: {stat.base_stat}</StatName>
+                <ProgressBarContainer >
+                  <ProgressBar bgColor={bgColor} value={stat.base_stat} />
+                </ProgressBarContainer>
               </StatItem>
+
             ))}
           </StatsList>
 
@@ -148,6 +152,43 @@ const Header = styled.header<{ bgColor: string, lighterColor: string }>`
     transform: translate(-50%, -50%);
     opacity: 0.3; 
     z-index: 0;
+
+    @media (min-width: 400px) {
+      left: 205px;
+    }
+
+    @media (min-width: 424px) {
+      left: 215px;
+    }
+
+    @media (min-width: 500px) {
+        left: 300px;
+    }
+    @media (min-width: 700px) {
+      left: 390px;
+      top: 390px;
+    }
+
+    @media (min-width: 850px) {
+      left: 490px;
+
+    }
+
+    @media (min-width: 1026px) {
+      left: 1045px;
+    }
+
+    @media (min-width: 1200px) {
+      left: 940px;
+    }
+    
+    @media (min-width: 1600px) {
+      left: 800px;
+    }
+
+    @media (min-width: 1800px) {
+       left: 940px;
+    }
   }
 `;
 
@@ -164,6 +205,10 @@ const H1 = styled.h1`
   font-size: 34px;
   font-weight: 600;
   text-transform: capitalize;
+
+  @media (min-width: 700px) {
+    font-size: 50px;
+  }
 `;
 
 const H1span = styled.span`
@@ -218,31 +263,86 @@ const Main = styled.main<{ bgColor: string }>`
 const Section = styled.section`
   background-color: #fff;
   border-radius: 22px;
+  padding: 0 16px 24px;
 `;
 const PokemonImg = styled.div`
   position: absolute;
   top: 180px;
   left: 95px;
+
+
+    @media (min-width: 400px) {
+      left: 130px;
+    }
+
+    @media (min-width: 500px) {
+      left: 195px;
+    }
+
+    @media (min-width: 700px) {
+      left: 305px;
+    }
+
+    @media (min-width: 850px) {
+      left: 375px;
+    }
+    @media (min-width: 950px) {
+      left: 400px;
+    }
+
+    @media (min-width: 1026px) {
+      left: 545px;
+    }
+    
+    @media (min-width: 1200px) {
+      left: 850px;
+    }
+    
+    @media (min-width: 1600px) {
+      left: 720px;
+    }
+    @media (min-width: 1800px) {
+       left: 850px;
+    }
 `
 
 const StatsList = styled.ul`
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px 0;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
 `;
 
 const StatItem = styled.li`
-  background-color: #f0f0f0;
-  color: #333;
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  font-size: 16px;
   font-weight: 500;
-  text-align: center;
-  min-width: 100px;
-  list-style: none;
+  text-transform: capitalize;
+`;
+
+const StatName = styled.span`
+  font-weight: 600;
+  color: #333;
+`;
+
+const ProgressBarContainer = styled.div`
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 5px;
+`;
+const ProgressBar = styled.div<{ value: number,  bgColor: string }>`
+  width: ${(props) => (props.value / 255) * 100}%;
+  height: 12px;
+  background: ${(props) => props.bgColor};
+  transition: width 0.5s ease-in-out;
 `;
 
 const MovesList = styled.ul`

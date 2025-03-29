@@ -7,107 +7,120 @@ import ButtonSearchType from "../home/ButtonSearchType";
 import { Link } from "react-router-dom";
 
 interface Pokemon {
-    name: string;
-    url: string;
+  name: string;
+  url: string;
 }
 
 const itemsPerPage = 30;
 
 const HomePage = () => {
-    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-    const [offset, setOffset] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
-    const [selectedType, setSelectedType] = useState<string>("");
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [offset, setOffset] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-    useEffect(() => {
-        const fetchPokemons = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(
-                    `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${offset}`
-                );
-                const data = await response.json();
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-                setPokemons((prev) => {
-                    const newPokemons = data.results.filter(
-                        (newPoke: Pokemon) => !prev.some((poke) => poke.name === newPoke.name)
-                    );
-                    return [...prev, ...newPokemons];
-                });
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}&offset=${offset}`
+        );
+        const data = await response.json();
 
-                setHasMore(data.results.length === itemsPerPage);
-            } catch (error) {
-                console.error("Error fetching Pokémon data:", error);
-            }
-            setLoading(false);
-        };
+        setPokemons((prev) => {
+          const newPokemons = data.results.filter(
+            (newPoke: Pokemon) => !prev.some((poke) => poke.name === newPoke.name)
+          );
+          return [...prev, ...newPokemons];
+        });
 
-        fetchPokemons();
-    }, [offset]);
-
-    useEffect(() => {
-        if (!selectedType) return;
-
-        const fetchPokemonsByType = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(`https://pokeapi.co/api/v2/type/${selectedType}`);
-                const data = await response.json();
-                const filteredPokemons = data.pokemon.map((p: any) => p.pokemon);
-
-                setPokemons(filteredPokemons);
-            } catch (error) {
-                console.error("Error fetching Pokémon by type:", error);
-            }
-            setLoading(false);
-        };
-
-        fetchPokemonsByType();
-    }, [selectedType]);
-
-    const handleLoadMore = () => {
-        setOffset((prev) => prev + itemsPerPage);
+        setHasMore(data.results.length === itemsPerPage);
+      } catch (error) {
+        console.error("Error fetching Pokémon data:", error);
+      }
+      setLoading(false);
     };
 
-    return (
-        <div>
-            <Header className="header-container">
-                <TitleH1 className="poketitle">Pokédex</TitleH1>
-                <DivHeader>
-                    <TitleH2>Find Your</TitleH2>
-                    <Th2>Favorite Pokémon</Th2>
-                    <DivSearchBar>
-                        <SearchButton>
-                            <img
-                                src="src/assets/search-svgrepo-com.svg"
-                                width={16}
-                                alt="search icon"
-                            />
-                        </SearchButton>
-                        <InputSearch type="text" placeholder="Pesquisar..." />
-                    </DivSearchBar>
-                    <div>
-                        <ButtonSearchType onSelectType={setSelectedType} />
-                    </div>
-                </DivHeader>
-            </Header>
+    fetchPokemons();
+  }, [offset]);
 
-            <Section>
-                <UL>
-                    {pokemons.map((poke) => {
-                        const pokemonId = poke.url.split("/").slice(-2, -1)[0];
-                        return (
-                            <StyledLink key={pokemonId} to={`/pokemon/${pokemonId}`}>
-                                <PokeCard name={poke.name} url={poke.url} />
-                            </StyledLink>
-                        );
-                    })}
-                </UL>
-                {hasMore && <ButtonLoadMore onClick={handleLoadMore} isLoading={loading} hasMore={hasMore} />}
-            </Section>
-        </div>
-    );
+  useEffect(() => {
+    if (!selectedType) return;
+
+    const fetchPokemonsByType = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/type/${selectedType}`);
+        const data = await response.json();
+        const filteredPokemons = data.pokemon.map((p: any) => p.pokemon);
+
+        setPokemons(filteredPokemons);
+      } catch (error) {
+        console.error("Error fetching Pokémon by type:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchPokemonsByType();
+  }, [selectedType]);
+
+  const handleLoadMore = () => {
+    setOffset((prev) => prev + itemsPerPage);
+  };
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value)
+  }
+
+  return (
+    <div>
+      <Header className="header-container">
+        <TitleH1 className="poketitle">Pokédex</TitleH1>
+        <DivHeader>
+          <TitleH2>Find Your</TitleH2>
+          <Th2>Favorite Pokémon</Th2>
+          <DivSearchBar>
+            <SearchButton>
+              <img
+                src="src/assets/search-svgrepo-com.svg"
+                width={16}
+                alt="search icon"
+              />
+            </SearchButton>
+            <InputSearch
+              type="text"
+              placeholder="Pesquisar..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </DivSearchBar>
+          <div>
+            <ButtonSearchType onSelectType={setSelectedType} />
+          </div>
+        </DivHeader>
+      </Header>
+
+      <Section>
+        <UL>
+          {filteredPokemons.map((poke) => {
+            const pokemonId = poke.url.split("/").slice(-2, -1)[0];
+            return (
+              <StyledLink key={pokemonId} to={`/pokemon/${pokemonId}`}>
+                <PokeCard name={poke.name} url={poke.url} />
+              </StyledLink>
+            );
+          })}
+        </UL>
+        {hasMore && <ButtonLoadMore onClick={handleLoadMore} isLoading={loading} hasMore={hasMore} />}
+      </Section>
+    </div>
+  );
 };
 const StyledLink = styled(Link)`
   text-decoration: none;
