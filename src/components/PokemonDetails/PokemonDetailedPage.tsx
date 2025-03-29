@@ -109,8 +109,12 @@ const PokemonDetailedPage = () => {
           <StatsList>
             {pokemon?.stats.map((stat: any) => (
               <StatItem key={stat.stat.name}>
-                {stat.stat.name}: {stat.base_stat}
+                <StatName>{stat.stat.name}: {stat.base_stat}</StatName>
+                <ProgressBarContainer >
+                  <ProgressBar bgColor={bgColor} value={stat.base_stat} />
+                </ProgressBarContainer>
               </StatItem>
+
             ))}
           </StatsList>
 
@@ -259,6 +263,7 @@ const Main = styled.main<{ bgColor: string }>`
 const Section = styled.section`
   background-color: #fff;
   border-radius: 22px;
+  padding: 0 16px 24px;
 `;
 const PokemonImg = styled.div`
   position: absolute;
@@ -303,22 +308,41 @@ const PokemonImg = styled.div`
 
 const StatsList = styled.ul`
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px 0;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
 `;
 
 const StatItem = styled.li`
-  background-color: #f0f0f0;
-  color: #333;
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  font-size: 16px;
   font-weight: 500;
-  text-align: center;
-  min-width: 100px;
-  list-style: none;
+  text-transform: capitalize;
+`;
+
+const StatName = styled.span`
+  font-weight: 600;
+  color: #333;
+`;
+
+const ProgressBarContainer = styled.div`
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 5px;
+`;
+const ProgressBar = styled.div<{ value: number,  bgColor: string }>`
+  width: ${(props) => (props.value / 255) * 100}%;
+  height: 12px;
+  background: ${(props) => props.bgColor};
+  transition: width 0.5s ease-in-out;
 `;
 
 const MovesList = styled.ul`
