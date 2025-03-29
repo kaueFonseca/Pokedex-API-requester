@@ -148,6 +148,43 @@ const Header = styled.header<{ bgColor: string, lighterColor: string }>`
     transform: translate(-50%, -50%);
     opacity: 0.3; 
     z-index: 0;
+
+    @media (min-width: 400px) {
+      left: 205px;
+    }
+
+    @media (min-width: 424px) {
+      left: 215px;
+    }
+
+    @media (min-width: 500px) {
+        left: 300px;
+    }
+    @media (min-width: 700px) {
+      left: 390px;
+      top: 390px;
+    }
+
+    @media (min-width: 850px) {
+      left: 490px;
+
+    }
+
+    @media (min-width: 1026px) {
+      left: 1045px;
+    }
+
+    @media (min-width: 1200px) {
+      left: 940px;
+    }
+    
+    @media (min-width: 1600px) {
+      left: 800px;
+    }
+
+    @media (min-width: 1800px) {
+       left: 940px;
+    }
   }
 `;
 
@@ -164,6 +201,10 @@ const H1 = styled.h1`
   font-size: 34px;
   font-weight: 600;
   text-transform: capitalize;
+
+  @media (min-width: 700px) {
+    font-size: 50px;
+  }
 `;
 
 const H1span = styled.span`
@@ -223,6 +264,41 @@ const PokemonImg = styled.div`
   position: absolute;
   top: 180px;
   left: 95px;
+
+
+    @media (min-width: 400px) {
+      left: 130px;
+    }
+
+    @media (min-width: 500px) {
+      left: 195px;
+    }
+
+    @media (min-width: 700px) {
+      left: 305px;
+    }
+
+    @media (min-width: 850px) {
+      left: 375px;
+    }
+    @media (min-width: 950px) {
+      left: 400px;
+    }
+
+    @media (min-width: 1026px) {
+      left: 545px;
+    }
+    
+    @media (min-width: 1200px) {
+      left: 850px;
+    }
+    
+    @media (min-width: 1600px) {
+      left: 720px;
+    }
+    @media (min-width: 1800px) {
+       left: 850px;
+    }
 `
 
 const StatsList = styled.ul`
