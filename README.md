@@ -14,7 +14,6 @@ A simple Pokédex built with **React + TypeScript**, fetching data from the [Pok
 - **Styled-Components** (for styling)
 - **React Router** (for navigation)
 - **Fetch API** (to get data from PokéAPI)
-- **Context** (to manage and share global state)
 
 ## 📦 Installation
 
