@@ -74,7 +74,7 @@ Happy coding! 🎉
 ## 📸 Preview
 
 ### Desktop Version
-![Pokédex Home](https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/assets/pokedex-images/pokedex-home-desktop.jpg)
+![Pokédex Home](assets/pokedex-images/pokedex-home-desktop.jpg)
 
 ### Mobile Version
 ![Pokédex Home Mobile](./assets/pokedex-images/pokedex-home-mobile.jpg)
