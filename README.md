@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Pokédex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Pokédex built with **React + TypeScript**, fetching data from the [PokéAPI](https://pokeapi.co/).
 
-Currently, two official plugins are available:
+## 🚀 Features
+- List of Pokémon with names and images
+- Fetches data dynamically from the PokéAPI
+- Dark/Light theme support
+- Responsive design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Technologies Used
+- **React** (with hooks)
+- **TypeScript**
+- **Styled-Components** (for styling)
+- **React Router** (for navigation)
+- **Fetch API** (to get data from PokéAPI)
 
-## Expanding the ESLint configuration
+## 📦 Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/your-username/pokedex.git
+cd pokedex
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 2️⃣ Install Dependencies
+```sh
+npm install
 ```
+
+### 3️⃣ Start the Project
+```sh
+npm run dev
+```
+The application will be available at `http://localhost:5173` (or a similar port).
+
+## 📂 Project Structure
+```
+.
+├── src
+│   ├── components      # UI components (e.g., PokeCard)
+│   ├── pages           # Page components (e.g., Home, Details)
+│   ├── services        # API calls (getPokemonApi, getPokemonDetails)
+│   ├── styles          # Global styles
+│   ├── App.tsx         # Main application component
+│   ├── main.tsx        # Entry point
+│   ├── routes.tsx      # React Router setup
+│   └── types.ts        # TypeScript interfaces
+└── README.md
+```
+
+## 📌 API Reference
+We use [PokéAPI](https://pokeapi.co/) to retrieve Pokémon data.
+
+Example API call:
+```ts
+const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20");
+const data = await response.json();
+console.log(data.results); // List of Pokémon
+```
+
+## 📝 Contributing
+Feel free to fork this repository and submit pull requests.
+
+### Steps to Contribute:
+1. **Fork** the repository
+2. **Create a new branch** (`feature-new-component`)
+3. **Commit your changes** (`git commit -m 'Add new feature'`)
+4. **Push to the branch** (`git push origin feature-new-component`)
+5. **Submit a pull request** 🚀
+
+---
+Happy coding! 🎉
+
