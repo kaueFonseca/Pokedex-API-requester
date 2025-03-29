@@ -71,4 +71,6 @@ Feel free to fork this repository and submit pull requests.
 
 ---
 Happy coding! 🎉
+## 📸 Preview
+![Pokedex Preview](./assets/pokemon-images/pokedex-home-desktop.jpg)
 
