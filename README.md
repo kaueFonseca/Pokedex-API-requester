@@ -73,9 +73,14 @@ Feel free to fork this repository and submit pull requests.
 Happy coding! 🎉
 ## 📸 Preview
 
-### Desktop Version
-![Pokédex Home](src/assets/pokedex-images/pokedex-home-desktop.jpg)
-
 ### Mobile Version
 ![Pokédex Home Mobile](src/assets/pokedex-images/pokedex-home-mobile.jpg)
+![Pokédex Page Mobile](src/assets/pokedex-images/pokedex-page-mobile.jpg)
+
+
+### Desktop Version
+![Pokédex Home](src/assets/pokedex-images/pokedex-home-desktop.jpg)
+![Pokédex Home](src/assets/pokedex-images/pokedex-page-desktop.jpg)
+
+
 
