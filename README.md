@@ -77,5 +77,5 @@ Happy coding! 🎉
 ![Pokédex Home](src/assets/pokedex-images/pokedex-home-desktop.jpg)
 
 ### Mobile Version
-![Pokédex Home Mobile](./assets/pokedex-images/pokedex-home-mobile.jpg)
+![Pokédex Home Mobile](src/assets/pokedex-images/pokedex-home-mobile.jpg)
 
