@@ -80,7 +80,7 @@ Happy coding! 🎉
 
 ### Desktop Version
 ![Pokédex Home](src/assets/pokedex-images/pokedex-home-desktop.jpg)
-![Pokédex Home](src/assets/pokedex-images/pokedex-page-desktop.jpg)
+![Pokédex Home](src/assets/pokedex-images/pokemon-page-desktop.jpg)
 
 
 
