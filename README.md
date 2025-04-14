@@ -5,7 +5,6 @@ A simple Pokédex built with **React + TypeScript**, fetching data from the [Pok
 ## 🚀 Features
 - List of Pokémon with names and images
 - Fetches data dynamically from the PokéAPI
-- Dark/Light theme support
 - Responsive design
 
 ## 🛠 Technologies Used
